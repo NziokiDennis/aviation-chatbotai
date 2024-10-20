@@ -1,0 +1,12 @@
+{
+  "lookup": {
+    "eJyLrq6NBQAEOAGx": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohPbUkPi0nMz2jJD4zLy2/tjYWABHZH5Y=": "action_flight_status",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohPbUkPi0nMz2jJD4zLy2/ljjToDqKSxJLSouJMDQWAP7AQG0=": "utter_gate_info",
+    "eJyljFEKgCAQBa/iATqBV4lYJDZbsC302Y949wT9L+jvDcybudTJlCvyTW6FnGpN6YPUHWzNgCAJrM3NiWNzRBvCGs+gLYjfQaLbWb/VxiPBIaff0QxwJO/AXX/vLQ/r1V8l": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohvSg1taS2NhYA6dwbhQ==": "utter_greet",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohvSg1taSWgBmlJSWpRfEQpbhMiAUAQvc0lw==": "action_listen",
+    "eJydjlEKgCAQBa/iATqBV4lYJDaTbAv32Y949wT7F/p7A8Pw5lInU+7ED7kV4RJrSh8k7mRrPohBwdLcrJyaE6QhrPGJGXXQyAAn6uq/wuCF04O2GPwOUjhkrXV5AXpwU3M=": "action_flight_status",
+    "eJydjkEKgCAURK/iATqBV4n4SPxMMgv/2Ea8e4JtWiXtZuDNY8ZcBpXPyBeZGe4IWuUWKJidtXqKdwIOlU3CsTIu1AqtbGRG+XAkgCM19J/h44WRjRbv7AoSGCTp9L03PdrpBotFdUE=": "action_listen"
+  }
+}
