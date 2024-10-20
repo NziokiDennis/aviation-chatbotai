@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags for responsive design -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nzioki Flight Chatbot</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS (Optional for additional styling) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Inline CSS for custom chat styling -->
+    <style>
+        /* Container for chat messages */
+        .chat-container {
+            height: 400px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* Chat bubbles */
+        .chat-bubble {
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            max-width: 70%;
+            display: flex;
+            align-items: center;
+        }
+
+        /* User and bot message styles */
+        .user-message {
+            background-color: #e0f7fa;
+            margin-left: auto; /* Aligns user messages to the right */
+        }
+
+        .bot-message {
+            background-color: #ffebee;
+            margin-right: auto; /* Aligns bot messages to the left */
+        }
+
+        /* Icons */
+        .icon {
+            width: 30px;
+            margin-right: 10px;
+        }
+
+        /* Full width input group for smaller screens */
+        .input-group {
+            display: flex;
+            align-items: center; /* Center items vertically */
+            border-top: 1px solid #ccc; /* Add a top border to separate from chat */
+            padding-top: 10px; /* Add some padding to the top */
+        }
+
+        /* Responsive adjustments for mobile screens */
+        @media (max-width: 768px) {
+            .chat-container {
+                height: 300px; /* Adjust height for mobile */
+            }
+
+            .chat-bubble {
+                max-width: 90%; /* Increase chat bubble width on smaller screens */
+            }
+
+            .input-group {
+                flex-direction: column;
+            }
+
+            /* Make the input and button full width */
+            .form-control {
+                margin-bottom: 10px;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%; /* Full width button */
+            }
+        }
+
+        /* Custom styles for the chat input */
+        .chat-input {
+            flex-grow: 1; /* Allow input to take available space */
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            padding: 10px;
+            margin-right: 10px; /* Space between input and button */
+        }
+
+        .send-btn {
+            border-radius: 50%;
+            padding: 10px 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Title of the chatbot -->
+        <h2 class="text-center">Nzioki Flight Chatbot</h2>
+
+        <!-- Chatbox wrapped in a Bootstrap card -->
+        <div class="card">
+            <div class="card-body">
+                <!-- Chat message container with overflow scroll -->
+                <div id="chat-box" class="chat-container">
+                    <!-- Initial bot greeting message -->
+                    <div class="chat-bubble bot-message">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" class="icon">
+                        Hello! I'm Nzioki Flight Chatbot. How can I assist you today?
+                    </div>
+                </div>
+
+                <!-- Input group with responsive input and button -->
+                <div class="input-group">
+                    <input type="text" id="user-input" class="form-control chat-input" placeholder="Ask about your flight...">
+                    <button id="send-btn" class="btn btn-primary send-btn">
+                        <img src="{{ url_for('static', filename='images/plane-icon.png') }}" class="icon" alt="Send">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap's JS and Font Awesome for icons -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+
+    <!-- Script to handle chat functionality -->
+    <script>
+        /**
+         * Function to append a message to the chat container.
+         * @param {string} sender - The name of the sender ('You' or 'Bot').
+         * @param {string} text - The message content.
+         * @param {boolean} isBot - Whether the message is from the bot or the user.
+         */
+        function appendMessage(sender, text, isBot) {
+            const chatBox = document.getElementById('chat-box'); // Get the chat container
+            const messageBubble = document.createElement('div'); // Create new message bubble
+            const icon = document.createElement('img'); // Create icon element
+
+            // Add chat-bubble class to the message
+            messageBubble.classList.add('chat-bubble');
+            icon.classList.add('icon'); // Add icon class to the image
+
+            if (isBot) {
+                messageBubble.classList.add('bot-message'); // Style bot message
+                icon.src = "{{ url_for('static', filename='images/plane.jpg') }}"; // Plane icon for bot
+            } else {
+                messageBubble.classList.add('user-message'); // Style user message
+                icon.src = "{{ url_for('static', filename='images/traveller.jpg') }}"; // Passenger icon for user
+            }
+
+            // Set the inner content of the message bubble
+            messageBubble.innerHTML = `<span><img src="${icon.src}" class="icon"></span> ${text}`;
+            chatBox.appendChild(messageBubble); // Add the message bubble to the chat container
+            chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the latest message
+        }
+
+        /**
+         * Event listener to send message on button click.
+         */
+        document.getElementById('send-btn').addEventListener('click', function() {
+            const userInput = document.getElementById('user-input').value; // Get user input
+            if (userInput) {
+                appendMessage('You', userInput, false); // Append user message
+                sendMessage(userInput); // Send the user message to the backend
+                document.getElementById('user-input').value = ''; // Clear the input field
+            }
+        });
+
+        /**
+         * Event listener to allow sending message with Enter key.
+         */
+        document.getElementById('user-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') { // Check if the key pressed is 'Enter'
+                event.preventDefault(); // Prevent default form submission
+                document.getElementById('send-btn').click(); // Trigger send button click
+            }
+        });
+
+        /**
+         * Function to send message to the backend and receive bot response.
+         * @param {string} text - The message content to send.
+         */
+        function sendMessage(text) {
+            fetch('/get_response', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: text }) // Send the user message as JSON
+            })
+            .then(response => response.json()) // Parse the response JSON
+            .then(data => {
+                const botReply = data.response ? data.response : "Sorry, I couldn't retrieve any information."; // Default reply
+                appendMessage('Bot', botReply, true); // Append bot message
+            });
+        }
+    </script>
+
+</body>
+</html>

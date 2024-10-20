@@ -1,0 +1,21 @@
+version: "3.1"
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - good morning
+    - good evening
+    - good afternoon
+
+- intent: ask_flight_status
+  examples: |
+    - What's the status of flight [KL123](flight_number)?
+    - Can you tell me the status of [QR567](flight_number)?
+    - I need the status of flight [AF789](flight_number).
+
+- intent: get_flight_info
+  examples: |
+    - Where is flight [QF2362](flight_number)?
+    - I want to know about flight [AA456](flight_number).

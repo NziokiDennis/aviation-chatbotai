@@ -1,0 +1,14 @@
+version: "3.1"
+stories:
+- story: greet and ask flight status
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_flight_status
+  - action: action_flight_status
+
+- story: ask flight gate info
+  steps:
+  - intent: get_flight_info
+  - action: action_flight_status
+  - action: utter_gate_info

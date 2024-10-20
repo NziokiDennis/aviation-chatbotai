@@ -1,0 +1,19 @@
+version: "3.1"
+
+rules:
+- rule: Greet and ask flight status
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- rule: Ask flight status
+  steps:
+  - intent: ask_flight_status
+  - action: action_flight_status
+
+- rule: Ask flight gate info
+  steps:
+  - intent: get_flight_info
+  - action: action_flight_status
+  - action: utter_gate_info
+
