@@ -1,6 +1,25 @@
+# Virtual environments
+.venv/
+venv/
+
+# Python
 __pycache__/
-.env
 *.pyc
+
+# Rasa cache and models
+.rasa/
+models/
+
+# Railway or VSCode
+.env
+*.db
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
 *.log
 .idea/
-venv/
+
+
