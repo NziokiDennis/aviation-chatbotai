@@ -1,0 +1,4 @@
+Flask
+rasa
+rasa-sdk
+requests
