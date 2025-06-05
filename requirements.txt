@@ -1,4 +1,4 @@
-flask
-rasa
-rasa-sdk
-requests
+flask==2.2.5
+rasa==3.6.10
+rasa-sdk==3.6.1
+requests==2.31.0
